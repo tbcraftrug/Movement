@@ -27,7 +27,7 @@ combinedHQXS["study_name"][combinedHQXS["study_name"] == 1145538280] <- "black-t
 
 #HQXS location data
 teamPiersmaHQXSlocations <- as.data.frame(getMovebankData(study=1563249841,login=login, removeDuplicatedTimestamps=T))
-teamPiersmaHQXS2022locations <- as.data.frame(getMovebankData(study=	2083443328,login=login, removeDuplicatedTimestamps=T))
+teamPiersmaHQXS2022locations <- as.data.frame(getMovebankData(study=2083443328,login=login, removeDuplicatedTimestamps=T))
 BtgTagus2021locations <- as.data.frame(getMovebankData(study=1693518103, login=login, removeDuplicatedTimestamps=T))
 HQXS_Black_tailed_godwitsLocations <- as.data.frame(getMovebankData(study=1658294759, login=login, removeDuplicatedTimestamps=T))
 southholland2021locations <- as.data.frame(getMovebankData(study=1145538280,login=login, removeDuplicatedTimestamps=T))
