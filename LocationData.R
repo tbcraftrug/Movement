@@ -208,6 +208,8 @@ combinedLocationData$timestamp <- as.Date(combinedLocationData$timestamp) #recon
 combinedLocationData$timestamps <- as.Date(combinedLocationData$timestamps) #reconvert timestamps
 
 #combine reference and location data
+library('data.table') # for setnames function
+setnames(combinedReferenceData, "animal_local_identifier", "local_identifier") #change name to match with location data table
 allLocations <-  merge(combinedReferenceData,combinedLocationData,by="local_identifier",all=FALSE)
 allLocations <- subset(allLocations,select = c(local_identifier,study_name,timestamp,location_lat,location_long))
                       
