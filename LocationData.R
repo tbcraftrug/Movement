@@ -233,11 +233,6 @@ allLocations <- subset(allLocations,select = c(local_identifier,study_name,times
 #   write.csv("allLocationsSpring2022.csv", row.names = FALSE)
 # allLocationsPreBreeding <- allLastTimestamps%>%filter(timestamp>"2022-01-01" & timestamp < "2022-03-01")%>%
 #   write.csv("allLocationsSpring2022.csv", row.names = FALSE)
-
-# 
-# #Dutch birds only
-# locations%>%filter(!study_name %like% "dummer",)%>%
-#   write.csv("DutchBirds.csv", row.names = FALSE)
 # 
 # #German birds only
 # locations%>%filter(study_name %like% "dummer",)%>%
@@ -258,61 +253,4 @@ allLocations <- subset(allLocations,select = c(local_identifier,study_name,times
 # #Lotek only
 # locations%>%filter(tag_manufacturer_name == "Lotek")%>%
 #   write.csv("/LotekBirds.csv", row.names = FALSE)
-# 
-################################post-fledge period############################################################
-# locations%>%filter(study_name == "wild juveniles")%>%
-#   filter(timestamp > "2015-04-01" & timestamp < "2015-08-01")%>%
-#   write.csv("postFledge2015.csv", row.names = FALSE)
-# 
-# locations%>%filter(study_name == "wild juveniles 2")%>%
-#   filter(timestamp > "2016-04-01" & timestamp < "2016-08-01")%>%
-#   write.csv("/postFledge2016.csv", row.names = FALSE)
-# 
-# locations%>%filter(study_name == "wild juveniles 3")%>%
-#   filter(timestamp > "2017-04-01" & timestamp < "2017-08-01")%>%
-#   write.csv("/postFledge2017.csv", row.names = FALSE)
-# 
-# 
-##############################################kmz############################################################################################
-#   # create points layer and sliding time bar
-#   library("GISTools")
-#   library("spacetime")
-#   
-#   # make it spatial
-#   sp <-SpatialPoints(locations[,c("location_long","location_lat")])
-#   
-#   # add the projection WG84
-#   proj4string(sp) <- CRS("+init=epsg:4326 +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0")
-#   locations$timestamp <- as.POSIXct(locations$timestamp)
-#   
-#   # define time element
-#   sp.st<-STIDF(sp,time=timestamp,data=locations[,c("local_identifier","timestamp","animal_timestamp_start","animal_timestamp_end","study_name")])
-#   sp.st<-sp.st[order(sp.st$local_identifier, sp.st$timestamp),] # order by id and timestamp
-#   
-#   # creating lines
-#   locations2<-locations[,c("location_long","location_lat","local_identifier")]
-#   locations3<-locations2[order(locations2$local_identifier, locations$timestamp),] # order by id and timestamp
-#   coordinates(locations3) <- ~location_long+location_lat
-#   ## list of Lines per id, each with one Line in a list
-#   x <- lapply(split(locations3, locations3$local_identifier), function(x) Lines(list(Line(coordinates(x))), x$local_identifier[1L]))
-#   lines <- SpatialLines(x)
-#   data <- data.frame(id = unique(locations3$local_identifier))
-#   rownames(data) <- data$id
-#   l <- SpatialLinesDataFrame(lines, data)
-#   # add the projection WG84
-#   proj4string(l) <- CRS("+init=epsg:4326 +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0")
-#   
-#   todaydate <- Sys.Date()
-#   todaydate
-#   
-#   #plot as kmz
-#   library("plotKML")
-#   shape="http://maps.google.com/mapfiles/kml/pal2/icon18.png"
-#   kml_open(paste("allbtg",todaydate,".kmz", sep=""))
-#   # kml_open("query.kmz")
-#   kml_layer(lapply(split(sp.st,sp.st$local_identifier.x), function(kmz.pts) kml_layer(kmz.pts,shape=shape,colour=local_identifier.x, points_names=kmz.pts$argos_lc,size=0.5,balloon=TRUE,subfolder.name=unique(kmz.pts$local_identifier.x))))
-#   kml_layer(l,colour=l$id, lwd=2)
-#   kml_close(paste("allbtg",todaydate,".kmz", sep=""))
-#   # kml_close("query.kmz")
-
-
+#
