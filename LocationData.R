@@ -115,6 +115,7 @@ allLocations <-  merge(combinedReferenceData,combinedLocationData,by="local_iden
 allLocations <- subset(allLocations, animal_taxon_detail == "Limosa limosa limosa") #remove bar-tailed/icelandic
 allLocations <- subset(allLocations, argos_lc!="A" & argos_lc!="B" & argos_lc!="C" & argos_lc!="Z" | is.na(argos_lc)) #remove low quality locations
 allLocations <- allLocations[,colSums(is.na(allLocations))<nrow(allLocations)] #remove NA columns
+allLocations <- distinct(allLocations)#remove duplicate rows
 allLocations <- subset(allLocations,select = c(local_identifier,study_name,timestamp,location_lat,location_long,tag_manufacturer_name,study_site,argos_lc,sensor))
 ############################export############################################################################################################################
 write.csv(allLocations,"allLocations.csv", row.names = FALSE)
