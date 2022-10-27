@@ -73,6 +73,10 @@ library(dplyr)
 library(plyr)
 combinedReferenceData <- rbind.fill(ib19,microwave2021,extremadura2022,southholland2021,BtgTagus2021,ad_dum2018,ad_dum2019,ad_dum2020,ad_dum2021,ch_dum2018,ch_dum2019,ch_dum2020,ch_dum2021,ad_dum2022,ch_dum2022,hmadults,hrjuv,hrjuv2016,
                                     hrjuv2017,polish,HQXS_Black_tailed_godwits,iberiaBlackwits,icarus,teamPiersmaHQXS,teamPiersmaHQXS2022,wildjuv,wildjuv2016,wildjuv2017)
+combinedReferenceData <- combinedReferenceData[!is.na(combinedReferenceData$animal_local_identifier),] #remove non deployed tags
+combinedReferenceData <- subset(combinedReferenceData,select = -c(sensor_type_id)) #remove sensor id column to prevent duplicate Lotek rows
+combinedReferenceData <- distinct(combinedReferenceData) #remove duplicates
+
 combinedLocationData <- rbind.fill(ib19data,microwave2021data,extremadura2022data,southholland2021data,BtgTagus2021data,ad_dum2018data,ad_dum2019data,ad_dum2020data,ad_dum2021data,ch_dum2018data,ch_dum2019data,ch_dum2020data,ch_dum2021data,ad_dum2022data,ch_dum2022data,hmadultsData,hrjuvData,hrjuv2016data,
                                              hrjuv2017data,polishData,HQXS_Black_tailed_godwitsData,iberiaBlackwitsData,icarusData,teamPiersmaHQXSdata,teamPiersmaHQXS2022data,wildjuvData,wildjuv2016data,wildjuv2017data)
 
@@ -119,3 +123,6 @@ allLocations <- distinct(allLocations)#remove duplicate rows
 allLocations <- subset(allLocations,select = c(local_identifier,study_name,timestamp,location_lat,location_long,tag_manufacturer_name,study_site,argos_lc,sensor))
 ############################export############################################################################################################################
 write.csv(allLocations,"allLocations.csv", row.names = FALSE)
+
+
+
