@@ -1,6 +1,4 @@
 ######################Combined godwit location data##########################################################################################################
-# https://gist.github.com/ 
-
 library(move) 
 library(tidyverse)
 
