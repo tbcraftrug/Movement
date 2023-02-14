@@ -3,8 +3,8 @@ library(move)
 library(tidyverse)
 
 #Movebank login
-username = "t.b.craft"
-password = "GodwitSnl24!!"
+username = 
+password = 
 login<-movebankLogin(username,password)
 
 ######################reference data######################
