@@ -3,8 +3,8 @@ library(move)
 library(tidyverse)
 
 #Movebank login
-username = 
-password = 
+username = "t.b.craft"
+password = "GodwitSnl24!!"
 login<-movebankLogin(username,password)
 
 ######################reference data######################
@@ -33,6 +33,8 @@ icarus <- as.data.frame(getMovebankReferenceTable(study=1487044886,login=login))
 polish <- as.data.frame(getMovebankReferenceTable(study=163516781,login=login))
 teamPiersmaHQXS <- as.data.frame(getMovebankReferenceTable(study=1563249841,login=login))
 teamPiersmaHQXS2022 <- as.data.frame(getMovebankReferenceTable(study=2083443328,login=login))
+teamPiersmaHQXS2023 <- as.data.frame(getMovebankReferenceTable(study=	2654984909,login=login))
+teamPiersmaInterrex2023 <- as.data.frame(getMovebankReferenceTable(study=	2621200322,login=login))
 wildjuv <- as.data.frame(getMovebankReferenceTable(study=75360602,login=login))
 wildjuv2016 <- as.data.frame(getMovebankReferenceTable(study=170829089,login=login))
 wildjuv2017 <- as.data.frame(getMovebankReferenceTable(study=282596404,login=login))
@@ -63,6 +65,8 @@ icarusData <- as.data.frame(getMovebankData(study=1487044886,login=login,removeD
 polishData <- as.data.frame(getMovebankData(study=163516781,login=login,removeDuplicatedTimestamps=TRUE))
 teamPiersmaHQXSdata <- as.data.frame(getMovebankData(study=1563249841,login=login,removeDuplicatedTimestamps=TRUE))
 teamPiersmaHQXS2022data <- as.data.frame(getMovebankData(study=2083443328,login=login,removeDuplicatedTimestamps=TRUE))
+teamPiersmaHQXS2023data <- as.data.frame(getMovebankData(study=	2654984909,login=login,removeDuplicatedTimestamps=TRUE))
+teamPiersmaInterrex2023data <- as.data.frame(getMovebankData(study=	2621200322,login=login,removeDuplicatedTimestamps=TRUE))
 wildjuvData <- as.data.frame(getMovebankData(study=75360602,login=login,removeDuplicatedTimestamps=TRUE))
 wildjuv2016data <- as.data.frame(getMovebankData(study=170829089,login=login,removeDuplicatedTimestamps=TRUE))
 wildjuv2017data <- as.data.frame(getMovebankData(study=282596404,login=login,removeDuplicatedTimestamps=TRUE))
@@ -70,13 +74,13 @@ wildjuv2017data <- as.data.frame(getMovebankData(study=282596404,login=login,rem
 library(dplyr)
 library(plyr)
 combinedReferenceData <- rbind.fill(ib19,microwave2021,extremadura2022,southholland2021,BtgTagus2021,ad_dum2018,ad_dum2019,ad_dum2020,ad_dum2021,ch_dum2018,ch_dum2019,ch_dum2020,ch_dum2021,ad_dum2022,ch_dum2022,hmadults,hrjuv,hrjuv2016,
-                                    hrjuv2017,polish,HQXS_Black_tailed_godwits,iberiaBlackwits,icarus,teamPiersmaHQXS,teamPiersmaHQXS2022,wildjuv,wildjuv2016,wildjuv2017)
+                                    hrjuv2017,polish,HQXS_Black_tailed_godwits,iberiaBlackwits,icarus,teamPiersmaHQXS,teamPiersmaHQXS2022,teamPiersmaHQXS2023,teamPiersmaInterrex2023,wildjuv,wildjuv2016,wildjuv2017)
 combinedReferenceData <- combinedReferenceData[!is.na(combinedReferenceData$animal_local_identifier),] #remove non deployed tags
 combinedReferenceData <- subset(combinedReferenceData,select = -c(sensor_type_id)) #remove sensor id column to prevent duplicate Lotek rows
 combinedReferenceData <- distinct(combinedReferenceData) #remove duplicates
 
 combinedLocationData <- rbind.fill(ib19data,microwave2021data,extremadura2022data,southholland2021data,BtgTagus2021data,ad_dum2018data,ad_dum2019data,ad_dum2020data,ad_dum2021data,ch_dum2018data,ch_dum2019data,ch_dum2020data,ch_dum2021data,ad_dum2022data,ch_dum2022data,hmadultsData,hrjuvData,hrjuv2016data,
-                                             hrjuv2017data,polishData,HQXS_Black_tailed_godwitsData,iberiaBlackwitsData,icarusData,teamPiersmaHQXSdata,teamPiersmaHQXS2022data,wildjuvData,wildjuv2016data,wildjuv2017data)
+                                             hrjuv2017data,polishData,HQXS_Black_tailed_godwitsData,iberiaBlackwitsData,icarusData,teamPiersmaHQXSdata,teamPiersmaHQXS2022data,teamPiersmaHQXS2023data,teamPiersmaInterrex2023data,wildjuvData,wildjuv2016data,wildjuv2017data)
 
 ######################add study name column######################
 combinedReferenceData$study_name <- combinedReferenceData$study_id
@@ -104,6 +108,8 @@ combinedReferenceData["study_name"][combinedReferenceData["study_name"] == 14825
 combinedReferenceData["study_name"][combinedReferenceData["study_name"] == 2098519852] <- "dummer chicks 2022"
 combinedReferenceData["study_name"][combinedReferenceData["study_name"] == 1563249841] <- "teampiersma hqxs"
 combinedReferenceData["study_name"][combinedReferenceData["study_name"] == 2083443328] <- "teampiersma hqxs 2022"
+combinedReferenceData["study_name"][combinedReferenceData["study_name"] == 2654984909] <- "teampiersma hqxs 2023"
+combinedReferenceData["study_name"][combinedReferenceData["study_name"] == 2621200322] <- "teampiersma interrex 2023"
 combinedReferenceData["study_name"][combinedReferenceData["study_name"] == 1693518103] <- "BtgTagus2021"
 combinedReferenceData["study_name"][combinedReferenceData["study_name"] == 1658294759] <- "HQXS Black-tailed Godwits"
 combinedReferenceData["study_name"][combinedReferenceData["study_name"] == 1487044886] <- "icarus black-tailed godwits theunis piersma"
@@ -114,13 +120,21 @@ library('data.table') # for setnames function
 setnames(combinedReferenceData, "animal_local_identifier", "local_identifier") #change name to match with location data table
 allLocations <-  merge(combinedReferenceData,combinedLocationData,by="local_identifier",all=FALSE)
 ############################filter############################
-allLocations <- subset(allLocations, animal_taxon_detail == "Limosa limosa limosa") #remove bar-tailed/icelandic
-allLocations <- subset(allLocations, argos_lc!="A" & argos_lc!="B" & argos_lc!="C" & argos_lc!="Z" | is.na(argos_lc)) #remove low quality locations
+#allLocations <- subset(allLocations, animal_taxon_detail == "Limosa limosa limosa") #remove bar-tailed/icelandic
+#allLocations <- subset(allLocations, argos_lc!="A" & argos_lc!="B" & argos_lc!="C" & argos_lc!="Z" | is.na(argos_lc)) #remove low quality locations
+allLocations <- subset(allLocations, argos_lc!="Z" | is.na(argos_lc)) #remove low quality locations
 allLocations <- allLocations[,colSums(is.na(allLocations))<nrow(allLocations)] #remove NA columns
+allLocations$animal_timestamp_start <- as.POSIXct(allLocations$animal_timestamp_start, format="%Y-%m-%d %H:%M:%S", tz="UTC")
+allLocations$animal_timestamp_end <- as.POSIXct(allLocations$animal_timestamp_end, format="%Y-%m-%d %H:%M:%S", tz="UTC")
+allLocations$timestamp <- as.POSIXct(allLocations$timestamp, format="%Y-%m-%d %H:%M:%S", tz="UTC")
+allLocations <- subset(allLocations, animal_timestamp_start > "2013-01-01" | animal_timestamp_end < "2023-01-01") #remove outlier dates
 allLocations <- distinct(allLocations)#remove duplicate rows
-allLocations <- subset(allLocations,select = c(local_identifier,study_name,timestamp,location_lat,location_long,tag_manufacturer_name,study_site,argos_lc,sensor))
+allLocations <- subset(allLocations,select = c(local_identifier,study_name,timestamp,location_lat,location_long,
+                                               animal_ring_id,tag_manufacturer_name,deploy_on_timestamp,
+                                               deploy_off_timestamp,number_of_location_events,tag_number_of_deployments,
+                                               comments,study_site,animal_sex,argos_error_radius,
+                                               argos_valid_location_algorithm,argos_semi_major,argos_lc,sensor,
+                                               import_marked_outlier,lotek_crc_status_text,algorithm_marked_outlier,
+                                               manually_marked_outlier,manually_marked_valid,gps_hdop,gps_vdop))
 ############################export############################################################################################################################
-write.csv(allLocations,"allLocations.csv", row.names = FALSE)
-
-
-
+#write.csv(allLocations,"allLocations.csv", row.names = FALSE)
